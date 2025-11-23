@@ -1,0 +1,43 @@
+// made the rectangle and in inside print the name also.
+#include <stdio.h>
+
+int main() {
+    int i, j;
+    int rows = 5;
+    int cols = 15;
+
+    for(i = 1; i <= rows; i++) {
+        for(j = 1; j <= cols; j++) {
+
+            
+            if(i == 1 || i == rows || j == 1 || j == cols) {
+                printf("*");
+            }
+
+        
+            else if(i == 3 && j == 5) {
+                printf("A");
+                j++;
+                printf("N");
+                j++;
+                printf("I");
+                j++;
+                printf("R");
+                j++;
+                printf("U");
+                j++;
+                printf("D");    
+                j++;
+                printf("H");
+            }
+
+           
+            else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
