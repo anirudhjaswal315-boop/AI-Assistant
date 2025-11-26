@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char secret[]="computer";
+    char guessed[100]; for(int i=0;i<strlen(secret);i++) guessed[i]='_'; guessed[strlen(secret)]=0;
+    int tries=6;
+    while(tries>0){
+        printf("%s\n", guessed);
+        char c; scanf(" %c",&c);
+        int found=0;
+        for(int i=0;i<strlen(secret);i++) if(secret[i]==c){ guessed[i]=c; found=1; }
+        if(!found) tries--;
+        if(strcmp(secret,guessed)==0){ printf("You win\n"); return 0; }
+    }
+    printf("You lose. Word: %s\n", secret);
+    return 0;
+}
