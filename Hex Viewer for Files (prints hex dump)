@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc,char* argv[]){
+    if(argc!=2){ printf("Usage: %s file\n",argv[0]); return 1; }
+    FILE* f=fopen(argv[1],"rb"); if(!f){ perror("open"); return 1; }
+    unsigned char buf[16]; size_t n; unsigned long addr=0;
+    while((n=fread(buf,1,16,f))>0){
+        printf("%08lx  ", addr);
+        for(size_t i=0;i<n;i++) printf("%02x ", buf[i]);
+        for(size_t i=n;i<16;i++) printf("   ");
+        printf(" |");
+        for(size_t i=0;i<n;i++) putchar((buf[i]>=32 && buf[i]<127)?buf[i]:'.');
+        printf("|\n");
+        addr += n;
+    }
+    fclose(f);
+    return 0;
+}
