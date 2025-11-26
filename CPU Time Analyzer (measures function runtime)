@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <time.h>
+
+void heavy(){
+    volatile long long s=0;
+    for(long long i=0;i<100000000;i++) s+=i;
+    (void)s;
+}
+
+int main(){
+    clock_t start = clock();
+    heavy();
+    clock_t end = clock();
+    double t = (double)(end-start)/CLOCKS_PER_SEC;
+    printf("Elapsed: %.3f seconds\n", t);
+    return 0;
+}
