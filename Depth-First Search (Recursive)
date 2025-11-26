@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{ int v; struct Node* next;} Node;
+typedef struct Graph{ int V; Node** adj;} Graph;
+Node* nnode(int v){ Node* n=malloc(sizeof(Node)); n->v=v; n->next=NULL; return n; }
+Graph* create(int V){ Graph* g=malloc(sizeof(Graph)); g->V=V; g->adj=malloc(V*sizeof(Node*)); for(int i=0;i<V;i++) g->adj[i]=NULL; return g; }
+void addEdge(Graph* g,int s,int d){ Node* n=nnode(d); n->next=g->adj[s]; g->adj[s]=n; }
+
+void dfsUtil(Graph* g,int v,int *vis){
+    vis[v]=1; printf("%d ",v);
+    Node* t=g->adj[v];
+    while(t){ if(!vis[t->v]) dfsUtil(g,t->v,vis); t=t->next; }
+}
+
+void dfs(Graph* g,int start){
+    int *vis=calloc(g->V,sizeof(int));
+    dfsUtil(g,start,vis); free(vis);
+}
+
+int main(){
+    Graph* g=create(4);
+    addEdge(g,0,1); addEdge(g,0,2); addEdge(g,1,2); addEdge(g,2,0); addEdge(g,2,3); addEdge(g,3,3);
+    dfs(g,2); printf("\n");
+    return 0;
+}
