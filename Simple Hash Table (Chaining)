@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 10
+
+typedef struct Node{ int key; struct Node *next;} Node;
+Node* table[SIZE];
+
+int hash(int key){ return key % SIZE; }
+
+void insert(int key){
+    int idx=hash(key);
+    Node* n=malloc(sizeof(Node)); n->key=key; n->next=table[idx]; table[idx]=n;
+}
+
+Node* search(int key){
+    int idx=hash(key);
+    Node* t=table[idx];
+    while(t){ if(t->key==key) return t; t=t->next; }
+    return NULL;
+}
+
+int main(){
+    for(int i=0;i<SIZE;i++) table[i]=NULL;
+    insert(15); insert(25); insert(35);
+    printf(search(25) ? "Found\n":"Not Found\n");
+    return 0;
+}
