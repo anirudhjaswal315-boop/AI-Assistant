@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{ int v; struct Node* next;} Node;
+
+Node* rev(Node* head){ Node* p=NULL; while(head){ Node* t=head->next; head->next=p; p=head; head=t; } return p; }
+
+int isPalindrome(Node* head){
+    Node *slow=head, *fast=head;
+    while(fast && fast->next){ slow=slow->next; fast=fast->next->next; }
+    Node* second=rev(slow); Node* p=head; Node* q=second;
+    int ok=1;
+    while(q){ if(p->v!=q->v){ ok=0; break; } p=p->next; q=q->next; }
+    rev(second); // restore
+    return ok;
+}
+
+int main(){
+    Node *h=malloc(sizeof(Node)); h->v=1; h->next=malloc(sizeof(Node)); h->next->v=2; h->next->next=malloc(sizeof(Node)); h->next->next->v=1; h->next->next->next=NULL;
+    printf(isPalindrome(h)?"Palindrome\n":"Not palindrome\n");
+    return 0;
+}
