@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc,char *argv[]){
+    if(argc!=4){ printf("Usage: %s in out key\n",argv[0]); return 1; }
+    FILE *in=fopen(argv[1],"rb"), *out=fopen(argv[2],"wb");
+    if(!in||!out){ printf("File error\n"); return 1; }
+    unsigned char key=atoi(argv[3]), b;
+    while(fread(&b,1,1,in)==1){ b ^= key; fwrite(&b,1,1,out); }
+    fclose(in); fclose(out);
+    printf("Done\n");
+    return 0;
+}
