@@ -1,0 +1,27 @@
+#include <stdio.h>
+#define N 8
+
+int board[N][N];
+
+int movesX[8]={2,1,-1,-2,-2,-1,1,2};
+int movesY[8]={1,2,2,1,-1,-2,-2,-1};
+
+int isSafe(int x,int y){ return x>=0 && x<N && y>=0 && y<N && board[x][y]==-1; }
+
+int solveKTUtil(int x,int y,int movei){
+    if(movei==N*N) return 1;
+    for(int k=0;k<8;k++){
+        int nx=x+movesX[k], ny=y+movesY[k];
+        if(isSafe(nx,ny)){ board[nx][ny]=movei; if(solveKTUtil(nx,ny,movei+1)) return 1; board[nx][ny]=-1; }
+    }
+    return 0;
+}
+
+int main(){
+    for(int i=0;i<N;i++) for(int j=0;j<N;j++) board[i][j]=-1;
+    board[0][0]=0;
+    if(solveKTUtil(0,0,1)){
+        for(int i=0;i<N;i++){ for(int j=0;j<N;j++) printf("%2d ",board[i][j]); printf("\n"); }
+    } else printf("No solution\n");
+    return 0;
+}
