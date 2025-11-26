@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 100
+
+typedef struct Queue{ int a[N]; int front, rear, size; } Queue;
+
+void init(Queue *q){ q->front=0; q->rear=-1; q->size=0; }
+
+void enqueue(Queue *q,int v){ if(q->size==N){ printf("Full\n"); return; } q->rear=(q->rear+1)%N; q->a[q->rear]=v; q->size++; }
+int dequeue(Queue *q){ if(q->size==0){ printf("Empty\n"); return -1;} int v=q->a[q->front]; q->front=(q->front+1)%N; q->size--; return v; }
+
+int main(){
+    Queue q; init(&q);
+    enqueue(&q,1); enqueue(&q,2);
+    printf("%d\n",dequeue(&q));
+    printf("%d\n",dequeue(&q));
+    return 0;
+}
