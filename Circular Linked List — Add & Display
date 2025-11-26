@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct CNode {int data; struct CNode *next;} CNode;
+
+CNode* create(int v){ CNode* n=malloc(sizeof(CNode)); n->data=v; n->next=n; return n; }
+
+void addEnd(CNode **head,int v){
+    CNode* n=create(v);
+    if(!*head){ *head=n; return; }
+    CNode *t=*head;
+    while(t->next!=*head) t=t->next;
+    t->next=n; n->next=*head;
+}
+
+void printC(CNode *head){
+    if(!head) return;
+    CNode *t=head;
+    do{ printf("%d ",t->data); t=t->next; } while(t!=head);
+    printf("\n");
+}
+
+int main(){
+    CNode *h=NULL;
+    addEnd(&h,1); addEnd(&h,2); addEnd(&h,3);
+    printC(h);
+    return 0;
+}
