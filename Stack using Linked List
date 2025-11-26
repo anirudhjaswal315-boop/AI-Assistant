@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{ int data; struct Node *next;} Node;
+
+void push(Node **top,int v){ Node *n=malloc(sizeof(Node)); n->data=v; n->next=*top; *top=n; }
+int pop(Node **top){ if(!*top){ printf("Empty\n"); return -1; } Node *t=*top; int v=t->data; *top=t->next; free(t); return v; }
+
+int main(){
+    Node *top=NULL;
+    push(&top,5); push(&top,7);
+    printf("%d\n",pop(&top));
+    printf("%d\n",pop(&top));
+    return 0;
+}
