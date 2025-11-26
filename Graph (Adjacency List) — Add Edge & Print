@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{ int v; struct Node* next;} Node;
+typedef struct Graph{ int V; Node** arr;} Graph;
+
+Node* newNode(int v){ Node* n=malloc(sizeof(Node)); n->v=v; n->next=NULL; return n; }
+Graph* createGraph(int V){ Graph* g=malloc(sizeof(Graph)); g->V=V; g->arr=malloc(V*sizeof(Node*)); for(int i=0;i<V;i++) g->arr[i]=NULL; return g; }
+void addEdge(Graph* g,int s,int d){ Node* n=newNode(d); n->next=g->arr[s]; g->arr[s]=n; n=newNode(s); n->next=g->arr[d]; g->arr[d]=n; }
+void printG(Graph* g){ for(int i=0;i<g->V;i++){ Node* t=g->arr[i]; printf("%d:",i); while(t){ printf("%d->",t->v); t=t->next;} printf("NULL\n"); } }
+
+int main(){
+    Graph* g=createGraph(5);
+    addEdge(g,0,1); addEdge(g,0,4); addEdge(g,1,2); addEdge(g,1,3); addEdge(g,1,4); addEdge(g,2,3); addEdge(g,3,4);
+    printG(g);
+    return 0;
+}
