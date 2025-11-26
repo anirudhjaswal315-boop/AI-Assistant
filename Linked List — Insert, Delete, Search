@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node* create(int val){
+    Node *n = malloc(sizeof(Node));
+    n->data = val; n->next = NULL;
+    return n;
+}
+
+void push(Node **head, int v){
+    Node *n = create(v);
+    n->next = *head; *head = n;
+}
+
+void deleteValue(Node **head, int v){
+    Node *cur = *head, *prev = NULL;
+    while(cur){
+        if(cur->data==v){
+            if(prev) prev->next = cur->next; else *head = cur->next;
+            free(cur); return;
+        }
+        prev = cur; cur = cur->next;
+    }
+}
+
+Node* search(Node *head,int v){
+    while(head){ if(head->data==v) return head; head=head->next; }
+    return NULL;
+}
+
+void printList(Node *head){
+    while(head){ printf("%d -> ", head->data); head=head->next; }
+    printf("NULL\n");
+}
+
+int main(){
+    Node *head = NULL;
+    push(&head,3); push(&head,2); push(&head,1);
+    printList(head);
+    deleteValue(&head,2);
+    printList(head);
+    printf(search(head,3) ? "Found\n":"Not Found\n");
+    return 0;
+}
