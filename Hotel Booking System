@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main(){
+    int rooms[10]={0}, opt;
+    do{
+        printf("1:Book 2:Free 3:List 4:Exit\n"); scanf("%d",&opt);
+        if(opt==1){ int r; scanf("%d",&r); if(r>=1&&r<=10 && !rooms[r-1]){ rooms[r-1]=1; printf("Booked\n"); } else printf("Invalid\n"); }
+        else if(opt==2){ int r; scanf("%d",&r); if(r>=1&&r<=10 && rooms[r-1]){ rooms[r-1]=0; printf("Freed\n"); } }
+        else if(opt==3){ for(int i=0;i<10;i++) printf("Room %d: %s\n", i+1, rooms[i]?"Occupied":"Free"); }
+    } while(opt!=4);
+    return 0;
+}
