@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main(){
+    long long n; scanf("%lld",&n);
+    for(long long p=2;p*p<=n;p++){
+        while(n%p==0){ printf("%lld ",p); n/=p; }
+    }
+    if(n>1) printf("%lld",n);
+    printf("\n");
+    return 0;
+}
