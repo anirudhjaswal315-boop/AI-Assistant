@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main(){
+    char s[256]; scanf("%s",s);
+    char *at = strchr(s,'@');
+    if(!at || at==s || strchr(at+1,'.')==NULL){ printf("Invalid\n"); return 0; }
+    printf("Possibly valid\n");
+    return 0;
+}
