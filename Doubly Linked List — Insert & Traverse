@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct DNode{
+    int data; struct DNode *prev,*next;
+} DNode;
+
+DNode* create(int v){
+    DNode* n = malloc(sizeof(DNode)); n->data=v; n->prev=n->next=NULL; return n;
+}
+
+void append(DNode **head,int v){
+    DNode *n=create(v);
+    if(!*head){ *head=n; return; }
+    DNode *t=*head;
+    while(t->next) t=t->next;
+    t->next=n; n->prev=t;
+}
+
+void printForward(DNode* h){ while(h){ printf("%d ",h->data); h=h->next; } printf("\n"); }
+void printBackward(DNode* h){ if(!h) {printf("\n"); return;} while(h->next) h=h->next; while(h){ printf("%d ",h->data); h=h->prev;} printf("\n"); }
+
+int main(){
+    DNode *head=NULL;
+    append(&head,10); append(&head,20); append(&head,30);
+    printForward(head);
+    printBackward(head);
+    return 0;
+}
