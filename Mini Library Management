@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct Book{ int id; char title[50]; int available;} Book;
+
+int main(){
+    Book b[5]={{1,"C Basics",1},{2,"DSA",1},{3,"OS",1}};
+    int opt;
+    do{
+        printf("1:List 2:Borrow 3:Return 4:Exit\n"); scanf("%d",&opt);
+        if(opt==1) for(int i=0;i<3;i++) printf("%d %s %s\n", b[i].id, b[i].title, b[i].available?"Available":"Borrowed");
+        else if(opt==2){ int id; scanf("%d",&id); for(int i=0;i<3;i++) if(b[i].id==id && b[i].available){ b[i].available=0; printf("Borrowed\n"); break; } }
+        else if(opt==3){ int id; scanf("%d",&id); for(int i=0;i<3;i++) if(b[i].id==id && !b[i].available){ b[i].available=1; printf("Returned\n"); break; } }
+    } while(opt!=4);
+    return 0;
+}
