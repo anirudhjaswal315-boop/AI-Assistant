@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+typedef struct Emp{ int id; char name[30]; double salary; } Emp;
+
+int main(){
+    Emp emps[100]; int n=0;
+    int opt;
+    do{
+        printf("1:Add 2:List 3:Exit\n"); scanf("%d",&opt);
+        if(opt==1){ scanf("%d %s %lf",&emps[n].id, emps[n].name, &emps[n].salary); n++; }
+        else if(opt==2) for(int i=0;i<n;i++) printf("%d %s %.2f\n", emps[i].id, emps[i].name, emps[i].salary);
+    } while(opt!=3);
+    return 0;
+}
