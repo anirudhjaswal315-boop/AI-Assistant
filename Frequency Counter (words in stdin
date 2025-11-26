@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main(){
+    char w[128];
+    char words[1000][128]; int cnt[1000]={0}, n=0;
+    while(scanf("%127s", w)==1){
+        for(int i=0; w[i]; i++) w[i]=tolower(w[i]);
+        int found=0;
+        for(int i=0;i<n;i++) if(strcmp(words[i],w)==0){ cnt[i]++; found=1; break; }
+        if(!found){ strcpy(words[n],w); cnt[n++] = 1; }
+    }
+    for(int i=0;i<n;i++) printf("%s: %d\n", words[i], cnt[i]);
+    return 0;
+}
