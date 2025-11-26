@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+    srand(time(NULL));
+    double temp=25.0;
+    for(int day=0;day<7;day++){
+        temp += (rand()%100 - 50)/50.0; // +-1
+        printf("Day %d: %.2f C\n", day+1, temp);
+    }
+    return 0;
+}
