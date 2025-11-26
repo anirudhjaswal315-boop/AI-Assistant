@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main(){
+    char s[200];
+    int key;
+    gets(s);
+    scanf("%d",&key);
+
+    for(int i=0;s[i];i++){
+        if(isalpha(s[i])){
+            char base = islower(s[i])?'a':'A';
+            s[i] = (s[i]-base+key)%26 + base;
+        }
+    }
+    printf("%s", s);
+}
