@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char url[512]; scanf("%s",url);
+    char proto[50]="", host[200]="", path[300]="";
+    char *p=strstr(url,"://");
+    if(p){ strncpy(proto,url,p-url); proto[p-url]=0; p+=3; } else p=url;
+    char *s=strchr(p,'/');
+    if(s){ strncpy(host,p,s-p); host[s-p]=0; strcpy(path,s); } else strcpy(host,p);
+    printf("Proto:%s\nHost:%s\nPath:%s\n", proto, host, path);
+    return 0;
+}
