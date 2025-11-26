@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int R=5,C=5;
+int maze[5][5]={
+{1,0,1,1,1},
+{1,1,1,0,1},
+{0,0,1,0,1},
+{1,1,1,1,1},
+{1,0,0,0,1}
+};
+int sol[5][5];
+
+int isSafe(int x,int y){ return x>=0 && x<R && y>=0 && y<C && maze[x][y]==1 && sol[x][y]==0; }
+
+int solve(int x,int y){
+    if(x==R-1 && y==C-1){ sol[x][y]=1; return 1; }
+    if(isSafe(x,y)){
+        sol[x][y]=1;
+        if(solve(x+1,y)) return 1;
+        if(solve(x,y+1)) return 1;
+        if(solve(x-1,y)) return 1;
+        if(solve(x,y-1)) return 1;
+        sol[x][y]=0;
+    }
+    return 0;
+}
+
+int main(){
+    if(solve(0,0)){
+        for(int i=0;i<R;i++){ for(int j=0;j<C;j++) printf("%d ",sol[i][j]); printf("\n"); }
+    } else printf("No path\n");
+    return 0;
+}
