@@ -1,0 +1,11 @@
+#include <stdio.h>
+#ifdef __unix__
+#include <sys/utsname.h>
+int main(){
+    struct utsname u; uname(&u);
+    printf("Sys: %s\nNode: %s\nRelease: %s\nVersion: %s\nMachine: %s\n", u.sysname,u.nodename,u.release,u.version,u.machine);
+    return 0;
+}
+#else
+int main(){ printf("Not supported on this platform\n"); return 0; }
+#endif
