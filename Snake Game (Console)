@@ -1,0 +1,14 @@
+/* Minimalistic snake-like demo: prints moving "*" across console */
+#include <stdio.h>
+#include <unistd.h> // for usleep
+int main(){
+    int pos=0,dir=1,limit=40;
+    while(1){
+        for(int i=0;i<pos;i++) putchar(' ');
+        putchar('*'); putchar('\r'); fflush(stdout);
+        pos += dir;
+        if(pos==limit||pos==0) dir=-dir;
+        usleep(80000);
+    }
+    return 0;
+}
