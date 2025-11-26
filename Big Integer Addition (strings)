@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+
+void add(char *a,char *b){
+    int la=strlen(a), lb=strlen(b), carry=0;
+    char res[1024]; res[0]=0;
+    int i=la-1,j=lb-1,k=0;
+    while(i>=0 || j>=0 || carry){
+        int da = (i>=0 ? a[i--]-'0' : 0);
+        int db = (j>=0 ? b[j--]-'0' : 0);
+        int s = da+db+carry; res[k++]= (s%10)+'0'; carry=s/10;
+    }
+    res[k]=0; for(int p=k-1;p>=0;p--) putchar(res[p]); putchar('\n');
+}
+
+int main(){ char a[512], b[512]; scanf("%s %s", a, b); add(a,b); return 0; }
