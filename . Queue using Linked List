@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{ int data; struct Node* next;} Node;
+typedef struct Q{ Node *front,*rear;} Q;
+
+void init(Q *q){ q->front=q->rear=NULL; }
+void enqueue(Q *q,int v){ Node *n=malloc(sizeof(Node)); n->data=v; n->next=NULL; if(!q->rear) q->front=q->rear=n; else { q->rear->next=n; q->rear=n; } }
+int dequeue(Q *q){ if(!q->front){ printf("Empty\n"); return -1;} Node *t=q->front; int v=t->data; q->front=t->next; if(!q->front) q->rear=NULL; free(t); return v; }
+
+int main(){
+    Q q; init(&q);
+    enqueue(&q,10); enqueue(&q,20);
+    printf("%d\n",dequeue(&q));
+    printf("%d\n",dequeue(&q));
+    return 0;
+}
