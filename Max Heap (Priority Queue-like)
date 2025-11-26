@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Heap{ int *a; int size,cap; } Heap;
+Heap* createH(int c){ Heap* h=malloc(sizeof(Heap)); h->a=malloc(c*sizeof(int)); h->cap=c; h->size=0; return h; }
+void insert(Heap* h,int v){ if(h->size==h->cap) return; h->a[h->size]=v; int i=h->size++; while(i && h->a[(i-1)/2] < h->a[i]){ int t=h->a[i]; h->a[i]=h->a[(i-1)/2]; h->a[(i-1)/2]=t; i=(i-1)/2; } }
+int extractMax(Heap* h){ if(h->size==0) return -1; int root=h->a[0]; h->a[0]=h->a[--h->size]; int i=0; while(1){ int l=2*i+1, r=2*i+2, largest=i; if(l<h->size && h->a[l]>h->a[largest]) largest=l; if(r<h->size && h->a[r]>h->a[largest]) largest=r; if(largest!=i){ int t=h->a[i]; h->a[i]=h->a[largest]; h->a[largest]=t; i=largest; } else break; } return root; }
+
+int main(){
+    Heap* h=createH(10);
+    insert(h,10); insert(h,20); insert(h,15);
+    printf("%d\n", extractMax(h));
+    return 0;
+}
