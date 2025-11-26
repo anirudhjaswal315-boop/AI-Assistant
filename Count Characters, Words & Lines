@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    FILE *fp = fopen("info.txt", "r");
+    if(!fp) return 1;
+
+    int ch, chars = 0, words = 0, lines = 0;
+    char prev = ' ';
+
+    while((ch = fgetc(fp)) != EOF) {
+        chars++;
+        if(ch == '\n') lines++;
+        if((ch != ' ' && ch != '\n' && ch != '\t') &&
+           (prev == ' ' || prev == '\n' || prev == '\t'))
+            words++;
+        prev = ch;
+    }
+
+    printf("Chars: %d\nWords: %d\nLines: %d", chars, words, lines);
+    fclose(fp);
+}
