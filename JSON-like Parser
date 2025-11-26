@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char s[512]; fgets(s,512,stdin);
+    char *p = s;
+    while((p=strchr(p,'\"'))){
+        char *q = strchr(p+1,'\"');
+        if(!q) break;
+        *q=0; printf("Key: %s\n", p+1);
+        p = strchr(q+1,':');
+        if(!p) break;
+        p++;
+        while(*p==' '||*p=='\"') p++;
+        char *r = p;
+        while(*r && *r!=',' && *r!='}') r++;
+        char temp = *r; *r=0; printf("Value: %s\n", p); *r=temp;
+        p=r;
+    }
+    return 0;
+}
