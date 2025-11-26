@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc,char* argv[]){
+    if(argc!=3){ printf("Usage: in out\n"); return 1; }
+    FILE *in=fopen(argv[1],"rb"), *out=fopen(argv[2],"wb");
+    if(!in||!out) return 1;
+    int prev = fgetc(in), cur; int count=1;
+    while((cur=fgetc(in))!=EOF){
+        if(cur==prev) count++;
+        else{ fwrite(&prev,1,1,out); fwrite(&count,sizeof(int),1,out); prev=cur; count=1; }
+    }
+    fwrite(&prev,1,1,out); fwrite(&count,sizeof(int),1,out);
+    fclose(in); fclose(out); printf("Done\n");
+    return 0;
+}
