@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct Item{ int id; char name[30]; int qty; } Item;
+
+int main(){
+    Item items[100]; int n=0, opt;
+    do{
+        printf("1:Add 2:List 3:Update 4:Exit\n"); scanf("%d",&opt);
+        if(opt==1){ scanf("%d %s %d",&items[n].id, items[n].name, &items[n].qty); n++; }
+        else if(opt==2) for(int i=0;i<n;i++) printf("%d %s %d\n", items[i].id, items[i].name, items[i].qty);
+        else if(opt==3){ int id; scanf("%d",&id); for(int i=0;i<n;i++) if(items[i].id==id){ scanf("%d",&items[i].qty); break; } }
+    } while(opt!=4);
+    return 0;
+}
